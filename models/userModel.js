@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
+  socialMediaType: { type: String },
   socialMedia: {
     type: String,
   },

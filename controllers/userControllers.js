@@ -2,9 +2,10 @@ const User = require("../models/userModel");
 
 exports.createInfluencer = async (req, res) => {
   try {
-    const { name, socialMedia, followers, socialMediaLink } = req.body;
+    const { name, socialMedia, followers, socialMediaLink, socialMediaType } =
+      req.body;
 
-    let user = await User.findOne({ socialMedia });
+    let user = await User.findOne({ socialMedia, socialMediaType });
     if (user) {
       return res.status(400).json({
         success: false,
@@ -19,12 +20,14 @@ exports.createInfluencer = async (req, res) => {
         socialMedia,
         followers,
         socialMediaLink,
+        socialMediaType,
       });
       res.status(201).json({
         success: true,
         user,
         message: "Influencer created",
         socialMediaLink,
+        socialMediaType,
         warning:
           "Influencer with same name is exist created influencer with numberd name",
       });
@@ -34,6 +37,7 @@ exports.createInfluencer = async (req, res) => {
         socialMedia,
         followers,
         socialMediaLink,
+        socialMediaType,
       });
       res.status(201).json({
         success: true,
