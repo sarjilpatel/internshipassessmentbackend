@@ -66,6 +66,26 @@ exports.getAllInfluencers = async (req, res) => {
     });
   }
 };
+exports.getInfluencer = async (req, res) => {
+  try {
+    const influencer = await User.findById(req.params.id);
+    if (!influencer) {
+      return res.status(404).json({
+        success: false,
+        message: "influencer not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      influencer,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 exports.updateInfluencer = async (req, res) => {
   try {
     let influencer = await User.findById(req.params.id);
